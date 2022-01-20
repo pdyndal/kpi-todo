@@ -1,0 +1,10 @@
+<div>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [formControl]='titleFormControl' [value]="newTodo.title">
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-raised-button color="accent" (click)="addTodo()">Add</button>
+    <button mat-raised-button color="primary" (click)="dialogRef.close()">Cancel</button>
+  </div>
+</div>

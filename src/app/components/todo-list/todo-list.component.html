@@ -1,0 +1,35 @@
+<div>
+  <div class="menu">
+    <mat-button-toggle-group class='sorting' name="sorting" value="id" (change)="sortListBy($event.value)">
+      <mat-button-toggle matTooltip="First not completed" value="completed">By completion</mat-button-toggle>
+      <mat-button-toggle value="name">By name</mat-button-toggle>
+      <mat-button-toggle matTooltip="Ascending" value="id">By date</mat-button-toggle>
+    </mat-button-toggle-group>
+    <div>
+      <button mat-raised-button type="button" (click)="addNewTodo()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="(todoItems$ | async); else spinner">
+    <mat-card *ngFor="let todo of (todoItems$ | async)">
+      <mat-card-title>
+        <mat-checkbox [checked]="todo.completed" (change)="changeTodoCompletedStatus(todo.id , $event.checked)"></mat-checkbox>
+        {{ todo.title }}
+      </mat-card-title>
+      <mat-card-actions>
+        <button mat-mini-fab color="primary" (click)="openEdit(todo)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab color="warn" (click)="deleteTodo(todo.id)">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #spinner>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>
